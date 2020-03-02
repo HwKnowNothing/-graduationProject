@@ -9,4 +9,4 @@ console.log('客户端向服务器发送消息',{name:'test'});
 //绑定监听 接受服务器的消息
 socket.on('receiveMsg',function (data) {
   console.log('接收到服务器消息:',data)
-})
+});

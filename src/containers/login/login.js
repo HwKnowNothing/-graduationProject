@@ -1,40 +1,52 @@
 /*
 * 登录路由组件
 * */
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {NavBar, WingBlank, List, InputItem, WhiteSpace, Button,Toast} from 'antd-mobile'
 import Logo from "../../components/logo/logo";
-import {connect} from 'react-redux';
-import {Redirect} from 'react-router-dom';
-
-import {login} from '../../redux/actions';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { login } from '../../redux/actions';
 
 class Login extends Component {
   state = {
     username:'',
     password:''
   };
-  //表单改变时 更新state
+
+  /**
+   * 改变input的内容
+   * @param attr 属性名  用户名/密码
+   * @param val  属性值
+   */
   handleChange = (attr,val) =>{
     this.setState({
       [attr]:val
     })
   };
-  // 点击 还没有账号 转到 注册
+
+  /**
+   * 点击 还没有账号 去注册页面
+   */
   toRegister = () => {
     this.props.history.replace('/register')
   };
-  //点击登录
+
+  /**
+   * 点击登陆时调用的方法
+   */
   login = () => {
     this.props.login(this.state)
   };
+
   componentDidUpdate(prevProps, prevState, snapshot) {
     const {msg} = this.props.user;
-    if(msg){
+    if (msg) {
       Toast.fail(msg, 1);
       this.props.user.msg = '';  //30
     }
   }
+
   render() {
     const {redirectTo} = this.props.user;
     //如果redirectTo有值，就需要重定向到指定路径

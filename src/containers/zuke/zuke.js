@@ -8,6 +8,7 @@ import {getUserList} from '../../redux/actions'
 import UserList from "../../components/user-list/user-list";
 
 class Zuke extends Component {
+
   componentDidMount() {
     this.props.getUserList('fangdong');
   }

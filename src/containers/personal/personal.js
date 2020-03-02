@@ -11,6 +11,9 @@ const Item = List.Item;
 const Brief = Item.Brief;
 
 class Personal extends Component {
+  /**
+   * 点击退出弹出二次提醒
+   */
   logout = () => {
     Modal.alert('退出','是否要退出登录',[
       {
@@ -20,9 +23,9 @@ class Personal extends Component {
       {
         text:'确认',
         onPress:()=>{
-          //1.清除cookie中的userid
+          // 1.清除cookie中的userid
           Cookies.remove('userid');
-          //2.清除redux中的state
+          // 2.清除redux中的state
           this.props.resetUser()
         }
       }

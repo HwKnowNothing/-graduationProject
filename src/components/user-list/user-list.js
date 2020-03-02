@@ -13,7 +13,7 @@ class UserList extends Component {
     return (
       <WingBlank style={{marginBottom:55,marginTop:50}}>
         {
-          userList.map((item,index)=>(
+          userList.map((item,index) => (
             <div key={item._id}>
               <WhiteSpace/>
               <Card onClick={() => this.props.history.push(`/chat/${item._id}`)}>
@@ -23,8 +23,8 @@ class UserList extends Component {
                 />
                 <Body>
                   <div>地址：{item.address}</div>
-                  {item.area?<div>面积：{item.area}</div>:null}
-                  {item.prise?<div>租金：{item.prise}</div>:null}
+                  { item.area ? <div>面积：{item.area}</div> : null}
+                  { item.prise ? <div>租金：{item.prise}</div> : null}
                   <div>描述：{item.info}</div>
                 </Body>
               </Card>

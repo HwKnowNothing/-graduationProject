@@ -16,28 +16,39 @@ class ZukeInfo extends Component {
     info: '', //描述
   };
 
-  //更新头像
+  /**
+   * 更新头像
+   * @param header 头像的名称
+   */
   setHeader = (header) => {
     this.setState({
       header
     })
   };
 
-  //收集表单信息
+  /**
+   * 收集表单的信息
+   * @param name 属性
+   * @param value 属性值
+   */
   handleChange = (name, value) => {
     this.setState({
       [name]: value
     })
   };
 
+  /**
+   * 点击保存
+   */
   save = () => {
     this.props.updateUser(this.state)
   };
 
   render() {
-    //信息已经完善，则重定向到对应主界面
+    // 信息已经完善，则重定向到对应主界面
     const {header, type} = this.props.user;
-    if (header) {  //如果头像有了，表示信息已经完善了
+    if (header) {
+      // 如果头像有了，表示信息已经完善了
       const path = type === 'zuke' ? '/zuke' : '/fangdong';
       return <Redirect to={path}/>
     }

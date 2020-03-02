@@ -11,25 +11,33 @@ import Logo from "../../components/logo/logo";
 
 class Register extends Component {
   state = {
-    username: '',
-    password: '',
-    password2: '', //确认密码
+    username: '', // 用户名
+    password: '', // 密码
+    password2: '', // 确认密码
     type: 'zuke',
   };
+
   componentDidUpdate(prevProps, prevState, snapshot) {
-    const {msg} = this.props.user;
+    const { msg } = this.props.user;
     if(msg){
       Toast.fail(msg, 1);
       this.props.user.msg = '';  //30
     }
   }
 
-  //点击注册时调用
+  /**
+   * 注册
+   */
   register = () => {
     //console.log(this.state)
     this.props.registerAct(this.state);
   };
-  //表单中的数据改变时，更新state
+
+  /**
+   * 改变表单的数据时
+   * @param attr 属性
+   * @param val  属性值
+   */
   handleChange = (attr, val) => {
     //更新状态
     this.setState({
@@ -37,7 +45,9 @@ class Register extends Component {
     })
   };
 
-  //点击 已有账号 转到登录界面
+  /**
+   * 点击已有账号，去登陆页面
+   */
   toLogin = () => {
     this.props.history.replace('/login')
   };

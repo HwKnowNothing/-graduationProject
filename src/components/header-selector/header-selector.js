@@ -6,14 +6,16 @@ import {List, Grid} from 'antd-mobile';
 
 
 export default class HeaderSelector extends Component {
+
   state = {
     icon:null  //对象,默认为null，当点击头像后读取
   };
+
   constructor(props){
     super(props);
     //选择头像的数据
     this.headerList = [];
-    for (let i = 0;i<20;i++){
+    for (let i = 0; i < 20 ; i++) {
       this.headerList.push({
         text:'头像'+(i+1),
         icon: require(`../../assets/images/头像${i+1}.png`)
@@ -21,6 +23,11 @@ export default class HeaderSelector extends Component {
     }
   }
 
+  /**
+   * 选择某一头像时，调用父组件传递的方法
+   * @param text
+   * @param icon
+   */
   handleClick = ({text,icon}) =>{
     //更新当前组件的state
     this.setState({icon});
@@ -31,7 +38,7 @@ export default class HeaderSelector extends Component {
   render() {
     const {icon} = this.state;
     //头部
-    const listHeader = !icon?'请选择头像':(
+    const listHeader = !icon? '请选择头像' : (
       <div>
         已选择的头像为: <img src={icon} alt="" style={{width:48,height:48}}/>
       </div>

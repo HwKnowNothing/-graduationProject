@@ -23,7 +23,7 @@ import {getUser} from '../../redux/actions';
 import './main.css'
 
 class Main extends Component {
-  //给组件对象添加属性 导航的组件信息
+  // 给组件对象添加属性 导航的组件信息
   navList = [
     {
       path: '/fangdong', // 路由路径
@@ -56,7 +56,7 @@ class Main extends Component {
   ];
 
   componentDidMount() {
-    //cookie中有userid 但是redux管理的user中没有_id ，发送请求获取对应的user
+    // cookie中有userid 但是redux管理的user中没有_id ，发送请求获取对应的user
     const userid = Cookies.get('userid');
     const {_id} = this.props.user;
     if (userid && !_id) {
