@@ -12,7 +12,8 @@ import {
   RECEIVE_USER_LIST,
   RECEIVE_MSG_LIST,
   RECEIVE_MSG,
-  MSG_READ
+  MSG_READ,
+  RECEIVE_HOUSING_INFO
 } from './action-types'
 
 const initUser = {
@@ -96,10 +97,26 @@ function chat(state = initChat, action) {
   }
 }
 
+const initHousing = {
+  housingInfo: [],
+};
+function housing(state = initHousing, action) {
+  switch (action.type) {
+    case RECEIVE_HOUSING_INFO:
+      console.log(action.data,'action')
+      return Object.assign(
+        {},
+        state,
+        {housingInfo: action.data});
+    default:
+      return state;
+  }
+}
 
 export default combineReducers({
   user,
   userList,
-  chat
+  chat,
+  housing
 })
 //向外暴露的状态解构：{user: {},userList:{},chat:{}}

@@ -32,8 +32,18 @@ class Personal extends Component {
     ])
   };
 
+  /**
+   * 去房源信息页面
+   */
+  goToHousing = () => {
+    const { username } = this.props.user;
+    console.log(username,'点击')
+    this.props.history.push(`/housing/${username}`)
+  };
+
   render() {
-    const {username, address, header, info, prise, area} = this.props.user;
+    const {username, address, header, info, prise, area, type} = this.props.user;
+    console.log(this.props.user,'11')
     return (
       <div style={{marginTop:50}}>
         <Result
@@ -57,6 +67,10 @@ class Personal extends Component {
         </List>
         <WhiteSpace/>
         <List>
+          {
+            type === 'fangdong' ? <Button onClick={this.goToHousing}>我的房源</Button> : null
+          }
+          <WhiteSpace/>
           <Button type='warning' onClick={this.logout}>退出登录</Button>
         </List>
       </div>

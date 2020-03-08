@@ -1,0 +1,28 @@
+.housing-page {
+    background: #ffffff;
+    min-height: 93vh;
+}
+
+.housing-page .container{
+    margin-top: 45px;
+}
+
+.no-find-img {
+    margin: 0 auto;
+}
+
+.no-find-img .no-img {
+    width: 375px;
+    height: 403px;
+}
+
+.no-find-text {
+    width: 100%;
+    margin: 0 auto;
+    font-size: 20px;
+    text-align: center;
+}
+
+.add-btn {
+    margin: 20px 145px;
+}

@@ -11,7 +11,8 @@ import {
   reqUser,
   reqUserList,
   reqChatMsgList,
-  reqReadMsg
+  reqReadMsg,
+  reqHousingInfo
 } from '../api/index';
 import {
   AUTH_SUCCESS,
@@ -21,7 +22,8 @@ import {
   RECEIVE_USER_LIST,
   RECEIVE_MSG_LIST,
   RECEIVE_MSG,
-  MSG_READ
+  MSG_READ,
+  RECEIVE_HOUSING_INFO
 } from './action-types';
 
 //授权成功的同步action
@@ -40,6 +42,8 @@ const receiveMsgList = ({users, chatMsgs, userid}) => ({type: RECEIVE_MSG_LIST, 
 const receiveMsg = (chatMsg, userid) => ({type: RECEIVE_MSG, data: {chatMsg, userid}});
 // 读取消息的同步action
 const msgRead = ({count, from, to}) => ({type: MSG_READ, data: {count, from, to}});
+// 获取房东的房源信息
+const receiveHousingInfo = (data) => ({type: RECEIVE_HOUSING_INFO, data: data});
 
 /**
  * 异步获取消息列表数据
@@ -228,6 +232,22 @@ export const getUserList = (type) => {
   }
 };
 
+/**
+ * 通过房东的用户名获取房东房源信息
+ * @param userName 用户名
+ * @returns {function(...[*]=)}
+ */
+export const getHousingInfo = (userName) => {
+  console.log(userName,'zhiqin');
+  return async dispatch => {
+    const response = await reqHousingInfo(userName);
+    const result = response.data;
+    if (result.code === 0) {
+      console.log(result.data,'daadadad');
+      dispatch(receiveHousingInfo(result.data))
+    }
+  }
+};
 
 
 

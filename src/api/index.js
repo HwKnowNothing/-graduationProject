@@ -24,3 +24,6 @@ export const reqChatMsgList = () => ajax('/msglist');
 
 //修改指定消息为已读
 export const reqReadMsg = (from) => ajax('readmsg',{from},'POST');
+
+// 获取房东的房源信息
+export const reqHousingInfo = (username) => ajax('/housing', {username}, 'POST');

@@ -11,11 +11,13 @@ import FangdongInfo from '../fangdong-info/fangdong-info';
 import ZukeInfo from '../zuke-info/zuke-info';
 import Fangdong from '../fangdong/fangdong';
 import Zuke from '../zuke/zuke';
+import HousingManagement from "../housing-management/housing-management";
 import Message from '../message/message';
 import Personal from '../personal/personal';
 import NouFound from '../../components/not-found/not-found';
 import NavFooter from "../../components/nav-footer/nav-footer";
 import Chat from '../chat/chat';
+import AddHousing from "../add-housing/add-housing";
 
 import {setRedirectTo} from '../../utils/index';
 import {getUser} from '../../redux/actions';
@@ -112,6 +114,8 @@ class Main extends Component {
           <Route path='/fangdonginfo' component={FangdongInfo}/>
           <Route path='/zukeinfo' component={ZukeInfo}/>
           <Route path='/chat/:userid' component={Chat}/>
+          <Route path='/housing/:username' component={HousingManagement}/>
+          <Route path='/addHousing' component={AddHousing}/>
           <Route component={NouFound}/>
         </Switch>
         {currentNav ? <NavFooter navList={navList} unReadCount={unReadCount}/> : null}

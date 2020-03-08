@@ -8,6 +8,15 @@ import {withRouter} from 'react-router-dom';
 const {Header,Body} = Card;
 class UserList extends Component {
 
+  /**
+   * 点击卡片去相应的聊天界面
+   * @param id
+   */
+  goChat = (id) => {
+    console.log(id,'之前')
+    this.props.history.push(`/chat/${id}`)
+  };
+
   render() {
     const {userList} = this.props;
     return (
@@ -16,7 +25,7 @@ class UserList extends Component {
           userList.map((item,index) => (
             <div key={item._id}>
               <WhiteSpace/>
-              <Card onClick={() => this.props.history.push(`/chat/${item._id}`)}>
+              <Card onClick={() => this.goChat(item._id)}>
                 <Header
                   thumb={require(`../../assets/images/${item.header}.png`)}
                   extra={item.username}

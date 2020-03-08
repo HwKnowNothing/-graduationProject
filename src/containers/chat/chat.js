@@ -47,6 +47,7 @@ class Chat extends Component {
   handleSend = () => {
     const from = this.props.user._id;
     const to = this.props.match.params.userid;
+    console.log(to,'之后？')
     const content = this.state.content.trim();
     // 发送请求
     if (content) {
