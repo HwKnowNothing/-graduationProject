@@ -4,6 +4,7 @@
 * 同步action
 * */
 import io from 'socket.io-client';
+import { Toast } from 'antd-mobile';
 import {
   reqRegister,
   reqLogin,
@@ -12,7 +13,8 @@ import {
   reqUserList,
   reqChatMsgList,
   reqReadMsg,
-  reqHousingInfo
+  reqHousingInfo,
+  reqAddHousing
 } from '../api/index';
 import {
   AUTH_SUCCESS,
@@ -238,17 +240,29 @@ export const getUserList = (type) => {
  * @returns {function(...[*]=)}
  */
 export const getHousingInfo = (userName) => {
-  console.log(userName,'zhiqin');
   return async dispatch => {
     const response = await reqHousingInfo(userName);
     const result = response.data;
     if (result.code === 0) {
-      console.log(result.data,'daadadad');
       dispatch(receiveHousingInfo(result.data))
     }
   }
 };
 
+/**
+ * 保存房源信息
+ * @param housingInfo 信息
+ */
+export const addHousing = (housingInfo) => {
+  console.log(housingInfo,'actions')
+  return async dispatch => {
+    const response = await reqAddHousing(housingInfo);
+    const result = response.data;
+    if (result.code === 0) {
+      Toast.success('添加成功', 1);
+    }
+  }
+};
 
 
 

@@ -24,3 +24,37 @@ export function setRedirectTo(type, header) {
   }
   return path;
 }
+
+/**
+ * 判断一个东西是不是空 空格 空字符串 undefined 长度为0的数组及对象会被认为是空的
+ * @param key
+ * @returns {boolean}
+ */
+export function isEmpty (key) {
+  if (key === undefined || key === '' || key === null) {
+    return true;
+  }
+  if (typeof (key) === 'string') {
+    key = key.replace(trimReg, '');
+    if (key == '' || key == null || key == 'null' || key == undefined || key == 'undefined') {
+      return true;
+    } else{
+      return false;
+    }
+  } else if (typeof (key) === 'undefined') {
+    return true;
+  } else if (typeof (key) === 'object') {
+    for (let i in key) {
+      return false;
+    }
+    return true;
+  } else if (typeof (key) === 'boolean') {
+    return false;
+  }
+}
+
+/**
+ * 去掉前后 空格/空行/tab 的正则 预先定义 避免在函数中重复构造
+ * @type {RegExp}
+ */
+let trimReg = /(^\s*)|(\s*$)/g;

@@ -26,3 +26,68 @@
 .add-btn {
     margin: 20px 145px;
 }
+
+.card-img {
+    width: 60px;
+    height: 60px;
+}
+
+.card-left {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+}
+
+.card-right {
+    position: absolute;
+    top: 15px;
+    left: 90px;
+    max-width: 420px;
+    height: 80px;
+}
+
+.card-address {
+    color: #333;
+    max-width: 420px;
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    margin-top: 5px;
+}
+
+.card-area {
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.card-prise {
+    font-size: 15px;
+    margin: 10px 0;
+    color: #eb5f00;
+    font-weight: bold;
+}
+
+.card-info {
+    font-size: 14px;
+    color: #797979;
+    margin-top: 10px;
+}
+
+.card-rent-out  {
+    width: 80px;
+    height: 30px;
+    position: absolute;
+    top: 65px;
+    right: 20px;
+    text-align: center;
+    font-weight: 600;
+    color: #ffffff;
+    font-size: 17px;
+    line-height: 30px;
+    border-radius: 15px;
+    background: #62ab00;
+}
+
+.red-card {
+    background: #ff6600;
+}

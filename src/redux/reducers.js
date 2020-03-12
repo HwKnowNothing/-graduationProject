@@ -103,7 +103,6 @@ const initHousing = {
 function housing(state = initHousing, action) {
   switch (action.type) {
     case RECEIVE_HOUSING_INFO:
-      console.log(action.data,'action')
       return Object.assign(
         {},
         state,
