@@ -91,3 +91,62 @@
 .red-card {
     background: #ff6600;
 }
+
+.card-delete {
+    width: 100px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f0f2f5;
+    color: #666666;
+    border-radius: 5px;
+    margin-left: 100px;
+    margin-top: 5px;
+}
+
+.card-list {
+    min-height: 94vh;
+    background: #f0f2f5;
+}
+
+.add-housing-container {
+    height: 50px;
+    background: #ffffff;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-housing-btn {
+    width: 300px;
+    height: 40px;
+    background: #108EE9;
+    border-radius: 20px;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+}
+
+.card-body {
+    border-bottom: 1px solid #f0f2f5;
+    padding-bottom: 20px;
+}
+
+.card-zuke {
+    position: absolute;
+    right: 5px;
+    width: 100px;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    top: 105px;
+    font-size: 13px;
+    color: #6682ae;
+}

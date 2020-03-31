@@ -7,3 +7,5 @@ export const RECEIVE_MSG_LIST = 'RECEIVE_MSG_LIST'; //接收所有相关消息
 export const RECEIVE_MSG = 'RECEIVE_MSG';  //接收一条消息
 export const MSG_READ = 'MSG_READ'; //查看消息
 export const RECEIVE_HOUSING_INFO = 'RECEIVE_HOUSING_INFO'; // 获取房源信息
+export const CHANGE_HOUSING = 'CHANGE_HOUSING'; // 改变房源信息
+export const DELETE_HOUSING = 'DELETE_HOUSING'; // 删除房源信息

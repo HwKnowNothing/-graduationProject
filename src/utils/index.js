@@ -36,7 +36,7 @@ export function isEmpty (key) {
   }
   if (typeof (key) === 'string') {
     key = key.replace(trimReg, '');
-    if (key == '' || key == null || key == 'null' || key == undefined || key == 'undefined') {
+    if (key === '' || key == null || key === 'null' || key === undefined || key === 'undefined') {
       return true;
     } else{
       return false;

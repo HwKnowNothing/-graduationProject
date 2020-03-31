@@ -14,7 +14,9 @@ import {
   reqChatMsgList,
   reqReadMsg,
   reqHousingInfo,
-  reqAddHousing
+  reqAddHousing,
+  reqChangeHouseInfo,
+  reqDelHousing,
 } from '../api/index';
 import {
   AUTH_SUCCESS,
@@ -25,27 +27,34 @@ import {
   RECEIVE_MSG_LIST,
   RECEIVE_MSG,
   MSG_READ,
-  RECEIVE_HOUSING_INFO
+  RECEIVE_HOUSING_INFO,
+  CHANGE_HOUSING,
+  DELETE_HOUSING,
 } from './action-types';
+import {isEmpty} from "../utils";
 
 //授权成功的同步action
-const authSuccess = (user) => ({type: AUTH_SUCCESS, data: user});
+const authSuccess = (user) => ({ type: AUTH_SUCCESS, data: user });
 //错误提示的同步action
-const errorMsg = (msg) => ({type: ERROR_MSG, data: msg});
+const errorMsg = (msg) => ({ type: ERROR_MSG, data: msg });
 // 接收用户的同步action
-const receiveUser = (user) => ({type: RECEIVE_USER, data: user});
+const receiveUser = (user) => ({ type: RECEIVE_USER, data: user });
 // 重置用户的同步action
-export const resetUser = (msg) => ({type: RESET_USER, data: msg});
+export const resetUser = (msg) => ({ type: RESET_USER, data: msg });
 // 用户列表同步action
-const receiveUserList = (userList) => ({type: RECEIVE_USER_LIST, data: userList});
+const receiveUserList = (userList) => ({ type: RECEIVE_USER_LIST, data: userList });
 // 接收消息列表的同步action
-const receiveMsgList = ({users, chatMsgs, userid}) => ({type: RECEIVE_MSG_LIST, data: {users, chatMsgs, userid}});
+const receiveMsgList = ({users, chatMsgs, userid}) => ({ type: RECEIVE_MSG_LIST, data: {users, chatMsgs, userid} });
 // 接收一个消息的同步action
-const receiveMsg = (chatMsg, userid) => ({type: RECEIVE_MSG, data: {chatMsg, userid}});
+const receiveMsg = (chatMsg, userid) => ({ type: RECEIVE_MSG, data: {chatMsg, userid} });
 // 读取消息的同步action
-const msgRead = ({count, from, to}) => ({type: MSG_READ, data: {count, from, to}});
+const msgRead = ({count, from, to}) => ({ type: MSG_READ, data: {count, from, to} });
 // 获取房东的房源信息
-const receiveHousingInfo = (data) => ({type: RECEIVE_HOUSING_INFO, data: data});
+const receiveHousingInfo = (data) => ({ type: RECEIVE_HOUSING_INFO, data: data });
+// 改变房源信息
+const changeHouse = (housingId, zuke) => ({ type: CHANGE_HOUSING, data: {housingId, zuke} });
+// 删除房源
+const deleteHouse = (id) => ({ type: DELETE_HOUSING, data: id });
 
 /**
  * 异步获取消息列表数据
@@ -264,5 +273,40 @@ export const addHousing = (housingInfo) => {
   }
 };
 
+/**
+ * 更改房源信息
+ * @param housingId 房源id
+ * @param zuke 租客的userName
+ */
+export const changeHouseInfo = (housingId, zuke) => {
+  return async dispatch => {
+    let housing;
+    if (isEmpty(zuke)) {
+      // 为空表示收回房源
+      housing = { zuke: null, is_rent_out: false, housingId };
+    } else {
+      housing = { zuke, is_rent_out: true, housingId };
+    }
+    const response = await reqChangeHouseInfo(housing);
+    const result = response.data;
+    if (result.code === 0) {
+      dispatch(changeHouse(housingId, zuke))
+    }
+  }
+};
+
+/**
+ * 删除房源信息
+ * @param id 要删除的房源id
+ */
+export const deleteHouses = (id) => {
+  return async dispatch => {
+    const res = await reqDelHousing(id);
+    const result = res.data;
+    if (result.code === 0) {
+      dispatch(deleteHouse(id))
+    }
+  }
+};
 
 

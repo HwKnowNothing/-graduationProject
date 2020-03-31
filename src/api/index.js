@@ -56,3 +56,15 @@ export const reqHousingInfo = (username) => ajax('/housing', {username}, 'POST')
  * @param housingInfo 房源信息
  */
 export const reqAddHousing = (housingInfo) => ajax('/saveHousing', {housingInfo}, 'POST');
+
+/**
+ * 更新房源信息
+ * @param housing 里面是房源的id和租客的userName
+ */
+export const reqChangeHouseInfo = (housing) => ajax('/changeHousingInfo', {housing}, 'POST');
+
+/**
+ * 删除房源信息
+ * @param _id 要删除的房源id
+ */
+export const reqDelHousing = (_id) => ajax('/deleteHousing', {_id},'POST');

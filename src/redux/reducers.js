@@ -2,7 +2,7 @@
 * reducer函数：根据老的state和指定的action返回新的state
 * */
 import {combineReducers} from 'redux';
-import {setRedirectTo} from '../utils/index'
+import {isEmpty, setRedirectTo} from '../utils/index'
 
 import {
   AUTH_SUCCESS,
@@ -13,7 +13,7 @@ import {
   RECEIVE_MSG_LIST,
   RECEIVE_MSG,
   MSG_READ,
-  RECEIVE_HOUSING_INFO
+  RECEIVE_HOUSING_INFO, CHANGE_HOUSING, DELETE_HOUSING
 } from './action-types'
 
 const initUser = {
@@ -107,6 +107,26 @@ function housing(state = initHousing, action) {
         {},
         state,
         {housingInfo: action.data});
+    case CHANGE_HOUSING:
+      return {
+        ...state,
+        housingInfo: state.housingInfo.map((item, index) => {
+          if (item._id == action.data.housingId) {
+            return { ...item, is_rent_out: !isEmpty(action.data.zuke), zuke: action.data.zuke ? action.data.zuke : null }
+          } else {
+            return item
+          }
+        })
+      };
+    case DELETE_HOUSING:
+      const index = state.housingInfo.findIndex(item => item._id === action.data);
+      const newArr = JSON.parse(JSON.stringify(state.housingInfo));
+      newArr.splice(index, 1);
+      console.log(newArr,'newArr')
+      return {
+        ...state,
+        housingInfo:newArr
+      };
     default:
       return state;
   }
