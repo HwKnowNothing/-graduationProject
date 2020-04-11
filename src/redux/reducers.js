@@ -13,7 +13,11 @@ import {
   RECEIVE_MSG_LIST,
   RECEIVE_MSG,
   MSG_READ,
-  RECEIVE_HOUSING_INFO, CHANGE_HOUSING, DELETE_HOUSING
+  RECEIVE_HOUSING_INFO,
+  CHANGE_HOUSING,
+  DELETE_HOUSING,
+  GET_INFO,
+  DELETE_INFO
 } from './action-types'
 
 const initUser = {
@@ -97,6 +101,7 @@ function chat(state = initChat, action) {
   }
 }
 
+// 房源reducer
 const initHousing = {
   housingInfo: [],
 };
@@ -122,10 +127,30 @@ function housing(state = initHousing, action) {
       const index = state.housingInfo.findIndex(item => item._id === action.data);
       const newArr = JSON.parse(JSON.stringify(state.housingInfo));
       newArr.splice(index, 1);
-      console.log(newArr,'newArr')
       return {
         ...state,
         housingInfo:newArr
+      };
+    default:
+      return state;
+  }
+}
+
+// 信息reducer
+const InitInformation = {
+  data: [],
+};
+function information(state = InitInformation, action) {
+  switch (action.type) {
+    case GET_INFO:
+      return { ...state, data: action.data };
+    case DELETE_INFO:
+      const index = state.data.findIndex(item => item._id === action.data);
+      const newArr = JSON.parse(JSON.stringify(state.data));
+      newArr.splice(index, 1);
+      return {
+        ...state,
+        data:newArr
       };
     default:
       return state;
@@ -136,6 +161,7 @@ export default combineReducers({
   user,
   userList,
   chat,
-  housing
+  housing,
+  information
 })
 //向外暴露的状态解构：{user: {},userList:{},chat:{}}

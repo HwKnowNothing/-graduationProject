@@ -17,6 +17,9 @@ import {
   reqAddHousing,
   reqChangeHouseInfo,
   reqDelHousing,
+  reqAddInfo,
+  reqGetAllInfo,
+  reqDeleteInfo,
 } from '../api/index';
 import {
   AUTH_SUCCESS,
@@ -30,6 +33,8 @@ import {
   RECEIVE_HOUSING_INFO,
   CHANGE_HOUSING,
   DELETE_HOUSING,
+  GET_INFO,
+  DELETE_INFO,
 } from './action-types';
 import {isEmpty} from "../utils";
 
@@ -55,6 +60,10 @@ const receiveHousingInfo = (data) => ({ type: RECEIVE_HOUSING_INFO, data: data }
 const changeHouse = (housingId, zuke) => ({ type: CHANGE_HOUSING, data: {housingId, zuke} });
 // 删除房源
 const deleteHouse = (id) => ({ type: DELETE_HOUSING, data: id });
+// 获取已发布信息
+const getInfo = (data) => ({ type: GET_INFO, data });
+// 删除发布的信息
+const deleteInformation = (id) => ({ type: DELETE_INFO, data: id });
 
 /**
  * 异步获取消息列表数据
@@ -309,4 +318,43 @@ export const deleteHouses = (id) => {
   }
 };
 
+/**
+ * 发布信息
+ * @param information 信息对象
+ */
+export const addInfo = (information) => {
+  return async dispatch => {
+    const res = await reqAddInfo(information);
+    const result = res.data;
+    if (result.code === 0) {
+      Toast.success('发布成功', 1);
+    }
+  }
+};
 
+/**
+ * 获取所有已发布的信息
+ */
+export const getAllInfo = () => {
+  return async dispatch => {
+    const res = await reqGetAllInfo();
+    const result = res.data;
+    if (result.code === 0) {
+      dispatch(getInfo(result.data))
+    }
+  }
+};
+
+/**
+ * 删除发布的细腻些
+ * @param id 信息的_id
+ */
+export const deleteInfo = (id) => {
+  return async dispatch => {
+    const res = await reqDeleteInfo(id);
+    const result = res.data;
+    if (result.code === 0) {
+      dispatch(deleteInformation(id))
+    }
+  }
+};

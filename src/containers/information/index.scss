@@ -1,0 +1,110 @@
+.information-container {
+  margin: 45px 0;
+
+  .info-card {
+    width: 375px;
+    height: 100%;
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2px;
+
+    .card-touxiang {
+      margin-left: 10px;
+      margin-top: 10px;
+    }
+
+    .card-infos {
+      height: 100%;
+      width: 300px;
+
+      .infos-username {
+        margin-top: 10px;
+        color: #5C6B8B;
+        font-weight: bold;
+      }
+
+      .infos-info {
+        font-size: 14px;
+        color: #797979;
+        margin-top: 10px;
+        width: 280px;
+        margin-bottom: 10px;
+      }
+
+      .info-img {
+        margin-bottom: 10px;
+
+        .img {
+          width: 60px;
+          height: 60px;
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+
+  .info-card-my {
+    width: 375px;
+    height: 100%;
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2px;
+
+    .card-infos {
+      width: 310px;
+      height: 100%;
+      float: right;
+    }
+
+    .info-img {
+      margin-bottom: 10px;
+
+      .img {
+        width: 60px;
+        height: 60px;
+        margin-right: 5px;
+      }
+    }
+
+    .card-touxiang {
+      margin-right: 10px;
+      margin-top: 10px;
+    }
+
+    .card-infos {
+      height: 100%;
+      width: 300px;
+      overflow: hidden;
+
+      .infos-username {
+        margin-top: 10px;
+        color: #5C6B8B;
+        font-weight: bold;
+        text-align: right;
+      }
+
+      .infos-info {
+        font-size: 14px;
+        color: #797979;
+        margin-top: 10px;
+        width: 280px;
+        margin-bottom: 10px;
+        text-align: right;
+        margin-left: 20px;
+      }
+
+      .info-img {
+        margin-bottom: 10px;
+        float: right;
+
+        .img {
+          width: 60px;
+          height: 60px;
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+}

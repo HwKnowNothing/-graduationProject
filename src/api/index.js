@@ -68,3 +68,20 @@ export const reqChangeHouseInfo = (housing) => ajax('/changeHousingInfo', {housi
  * @param _id 要删除的房源id
  */
 export const reqDelHousing = (_id) => ajax('/deleteHousing', {_id},'POST');
+
+/**
+ * 发布信息
+ * @param information
+ */
+export const reqAddInfo = (information) => ajax('/addInformation', { information }, 'POST');
+
+/**
+ * 获取所有用户已发布的信息
+ */
+export const reqGetAllInfo = () => ajax('/getAllInfo', {}, 'POST');
+
+/**
+ * 删除发布的信息
+ * @param _id 信息的Id
+ */
+export const reqDeleteInfo = (_id) => ajax('/deleteInfo', {_id}, 'POST');

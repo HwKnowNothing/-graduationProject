@@ -13,7 +13,7 @@ class UserList extends Component {
    * @param id
    */
   goChat = (id) => {
-    console.log(id,'之前')
+    console.log(`/chat/${id}`);
     this.props.history.push(`/chat/${id}`)
   };
 

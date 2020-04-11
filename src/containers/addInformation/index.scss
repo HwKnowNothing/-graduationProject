@@ -1,0 +1,23 @@
+.add-information-container {
+  margin-top: 45px;
+
+  .aic-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .header-text {
+      color: #666666;
+    }
+
+    .header-btn {
+      width: 60px;
+      height: 20px;
+      background-color: #108EE9;
+      color: #FFFFFF;
+      border-radius: 10px;
+      text-align: center;
+      line-height: 20px;
+    }
+  }
+}

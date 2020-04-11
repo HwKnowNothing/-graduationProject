@@ -72,7 +72,6 @@ class AddHousing extends Component{
 
   render() {
     const { files } = this.state;
-    console.log(this.state, '信息')
     return (
       <div className='add-housing'>
         <NavBar
