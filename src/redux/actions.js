@@ -20,6 +20,10 @@ import {
   reqAddInfo,
   reqGetAllInfo,
   reqDeleteInfo,
+  reqGetHousingByUsername,
+  reqGetComment,
+  reqAddNewComment,
+  reqDelComment,
 } from '../api/index';
 import {
   AUTH_SUCCESS,
@@ -35,6 +39,10 @@ import {
   DELETE_HOUSING,
   GET_INFO,
   DELETE_INFO,
+  ZUKE_HOUSING,
+  GET_ALL_COMMENT,
+  ADD_COMMENT,
+  DELETE_COMMENT
 } from './action-types';
 import {isEmpty} from "../utils";
 
@@ -64,6 +72,14 @@ const deleteHouse = (id) => ({ type: DELETE_HOUSING, data: id });
 const getInfo = (data) => ({ type: GET_INFO, data });
 // 删除发布的信息
 const deleteInformation = (id) => ({ type: DELETE_INFO, data: id });
+// 获取租客的租房信息
+const zukeHousing = (data) => ({ type: ZUKE_HOUSING, data });
+// 获取评论
+const getAllComment = (data) => ({ type: GET_ALL_COMMENT, data });
+// 新增评论
+const addNewComment = (comment) => ({ type: ADD_COMMENT, data: comment });
+// 删除房源
+const deleteComment = (id) => ({ type: DELETE_COMMENT, data: id });
 
 /**
  * 异步获取消息列表数据
@@ -323,7 +339,7 @@ export const deleteHouses = (id) => {
  * @param information 信息对象
  */
 export const addInfo = (information) => {
-  return async dispatch => {
+  return async () => {
     const res = await reqAddInfo(information);
     const result = res.data;
     if (result.code === 0) {
@@ -346,7 +362,7 @@ export const getAllInfo = () => {
 };
 
 /**
- * 删除发布的细腻些
+ * 删除发布的信息
  * @param id 信息的_id
  */
 export const deleteInfo = (id) => {
@@ -355,6 +371,65 @@ export const deleteInfo = (id) => {
     const result = res.data;
     if (result.code === 0) {
       dispatch(deleteInformation(id))
+    }
+  }
+};
+
+/**
+ * 查找租客的房源
+ * @param username
+ */
+export const getHousingByUsername = (username) => {
+  return async dispatch => {
+    const res = await reqGetHousingByUsername(username);
+    const result = res.data;
+    if (result.code === 0) {
+      dispatch(zukeHousing(result.data))
+    }
+  }
+};
+
+/**
+ * 获取所有评论
+ */
+export const getComment = () => {
+  return async dispatch => {
+    const res = await reqGetComment();
+    const result = res.data;
+    if (result.code === 0) {
+      console.log(result.data,'dadada')
+      dispatch(getAllComment(result.data))
+    }
+  }
+};
+
+/**
+ * 发表评论
+ * @param comment
+ */
+export const addComment = (comment) => {
+  return async (dispatch) => {
+    const res = await reqAddNewComment(comment);
+    const result = res.data;
+    if (result.code === 0) {
+      console.log(result.comment,'sha');
+      Toast.success('发表成功', 1);
+      dispatch(addNewComment(result.comment));
+    }
+  }
+};
+
+/**
+ * 删除发布的信息
+ * @param id 信息的_id
+ */
+export const delComment = (id) => {
+  return async dispatch => {
+    const res = await reqDelComment(id);
+    const result = res.data;
+    if (result.code === 0) {
+      Toast.success('删除成功', 1);
+      dispatch(deleteComment(id))
     }
   }
 };

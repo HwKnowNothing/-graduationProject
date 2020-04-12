@@ -41,6 +41,15 @@ class Personal extends Component {
     this.props.history.push(`/housing/${username}`)
   };
 
+  /**
+   * 去我的租房界面
+   */
+  goMyHousing = () => {
+    console.log(111);
+    const { username } = this.props.user;
+    this.props.history.push(`/myHousing/${username}`)
+  };
+
   render() {
     const {username, address, header, info, prise, area, type} = this.props.user;
     console.log(this.props.user,'11')
@@ -68,7 +77,10 @@ class Personal extends Component {
         <WhiteSpace/>
         <List>
           {
-            type === 'fangdong' ? <Button onClick={this.goToHousing}>我的房源</Button> : null
+            type === 'fangdong' && <Button onClick={this.goToHousing}>我的房源</Button>
+          }
+          {
+            type === 'zuke' && <Button onClick={this.goMyHousing}>我的租房</Button>
           }
           <WhiteSpace/>
           <Button type='warning' onClick={this.logout}>退出登录</Button>

@@ -37,8 +37,6 @@ class Information extends Component {
     return (
       <div className='information-container'>
         <NavBar
-          icon={<Icon type='left'/>}
-          onLeftClick={() => this.props.history.goBack()}
           className='nav-bar'
           rightContent={[
             <div onClick={this.clickRightIcon} key='0'>

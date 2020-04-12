@@ -20,6 +20,7 @@ import NavFooter from "../../components/nav-footer/nav-footer";
 import Chat from '../chat/chat';
 import AddHousing from "../add-housing/add-housing";
 import AddInformation from "../addInformation";
+import MyHousing from "../myHousing";
 
 import {setRedirectTo} from '../../utils/index';
 import {getUser} from '../../redux/actions';
@@ -126,6 +127,7 @@ class Main extends Component {
           <Route path='/housing/:username' component={HousingManagement}/>
           <Route path='/addHousing' component={AddHousing}/>
           <Route path='/addInformation' component={AddInformation}/>
+          <Route path='/myHousing/:username' component={MyHousing}/>
           <Route component={NouFound}/>
         </Switch>
         {currentNav ? <NavFooter navList={navList} unReadCount={unReadCount}/> : null}

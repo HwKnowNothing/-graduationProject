@@ -11,3 +11,7 @@ export const CHANGE_HOUSING = 'CHANGE_HOUSING'; // 改变房源信息
 export const DELETE_HOUSING = 'DELETE_HOUSING'; // 删除房源信息
 export const GET_INFO =　'GET_INFO';　// 获取发布信息
 export const DELETE_INFO = 'DELETE_INFO'; // 删除发布的信息
+export const ZUKE_HOUSING = 'ZUKE_HOUSING'; // 获取租客房源
+export const GET_ALL_COMMENT = 'GET_ALL_COMMENT'; // 获取所有评论
+export const ADD_COMMENT = 'ADD_COMMENT'; // 新增评论
+export const DELETE_COMMENT = 'DELETE_COMMENT'; // 删除评论

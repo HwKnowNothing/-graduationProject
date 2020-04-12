@@ -17,7 +17,9 @@ import {
   CHANGE_HOUSING,
   DELETE_HOUSING,
   GET_INFO,
-  DELETE_INFO
+  DELETE_INFO,
+  ZUKE_HOUSING,
+  GET_ALL_COMMENT, ADD_COMMENT, DELETE_COMMENT,
 } from './action-types'
 
 const initUser = {
@@ -103,7 +105,9 @@ function chat(state = initChat, action) {
 
 // 房源reducer
 const initHousing = {
-  housingInfo: [],
+  housingInfo: [], // 房东的房源信息
+  rentHousing: [], // 租客的租房信息
+  housingComment: [], // 所有租房评论
 };
 function housing(state = initHousing, action) {
   switch (action.type) {
@@ -130,6 +134,22 @@ function housing(state = initHousing, action) {
       return {
         ...state,
         housingInfo:newArr
+      };
+    case ZUKE_HOUSING:
+      return { ...state, rentHousing: action.data };
+    case GET_ALL_COMMENT:
+      return { ...state, housingComment: action.data };
+    case ADD_COMMENT:
+      const newHousingComment = JSON.parse(JSON.stringify(state.housingComment));
+      newHousingComment.push(action.data);
+      return { ...state, housingComment: newHousingComment };
+    case DELETE_COMMENT:
+      const i = state.housingComment.findIndex(item => item._id === action.data);
+      const arr = JSON.parse(JSON.stringify(state.housingComment));
+      arr.splice(i, 1);
+      return {
+        ...state,
+        housingComment:arr
       };
     default:
       return state;

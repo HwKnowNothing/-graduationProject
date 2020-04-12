@@ -1,0 +1,130 @@
+.my-housing {
+  margin-top: 45px;
+
+  .container {
+    background-color: #FFFFFF;
+    min-height: calc(100vh - 45px);
+
+    .no-find-text {
+      font-size: 16px;
+    }
+  }
+
+  .housing-list{
+    background-color: #f0f2f5;
+    min-height: calc(100vh - 45px);
+
+    .card-container {
+      height: 100%;
+      display: flex;
+      background-color: #FFFFFF;
+      border-radius: 0 0 5px 5px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+
+      .card-top {
+        height: 80px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .img {
+          height: 60px;
+          width: 60px;
+          margin-left: 20px;
+          border-radius: 5px;
+        }
+
+        .info-container {
+          margin-left: 20px;
+          width: 350px;
+
+          .info-fangdong {
+            margin-bottom: 5px;
+          }
+
+          .info-name {
+            color: #5C6B8B;
+          }
+
+          .info-prise {
+            color: #eb5f00;
+          }
+        }
+      }
+
+      .card-bottom {
+        height: 100%;
+        width: 320px;
+        margin-left: 25px;
+        margin-bottom: 10px;
+
+        .card-info {
+          margin-bottom: 5px;
+        }
+
+        .card-comment {
+          height: 30px;
+          line-height: 30px;
+          width: 100%;
+          text-align: right;
+          position: relative;
+
+          .card-icon {
+            position: absolute;
+            top: 3px;
+            right: -23px;
+          }
+        }
+      }
+    }
+  }
+
+  .no-comment {
+    text-align: center;
+    color: #A8A8A8;
+    margin-bottom: 10px;
+  }
+
+  .am-list-item .am-input-control input {
+    font-size: 14px;
+  }
+
+  .am-list-item {
+    min-height: 35px;
+  }
+
+  .am-list-item.am-input-item {
+    height: 35px;
+  }
+
+  .add-btn {
+    margin: 5px 0 0 130px;
+  }
+
+  .comment-card {
+    border-top: 1px solid #f0f2f5;
+    margin-bottom: 5px;
+    position: relative;
+
+    .card-name {
+      font-size: 13px;
+      color: #5C6B8B;
+      margin-top: 2px;
+    }
+
+    .card-comments {
+      font-size: 14px;
+      margin-left: 20px;
+      margin-top: 5px;
+      width: 260px;
+    }
+
+    .card-del {
+      color: red;
+      position: absolute;
+      top: 5px;
+      right: 5px;
+    }
+  }
+}

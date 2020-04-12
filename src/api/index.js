@@ -70,6 +70,12 @@ export const reqChangeHouseInfo = (housing) => ajax('/changeHousingInfo', {housi
 export const reqDelHousing = (_id) => ajax('/deleteHousing', {_id},'POST');
 
 /**
+ * 查找某一租客所租的房源
+ * @param username 租客的username
+ */
+export const reqGetHousingByUsername = (username) => ajax('/getHousingByUsername', {username}, 'POST');
+
+/**
  * 发布信息
  * @param information
  */
@@ -85,3 +91,20 @@ export const reqGetAllInfo = () => ajax('/getAllInfo', {}, 'POST');
  * @param _id 信息的Id
  */
 export const reqDeleteInfo = (_id) => ajax('/deleteInfo', {_id}, 'POST');
+
+/**
+ * 获取所有评论
+ */
+export const reqGetComment = () => ajax('/getAllComment', {}, 'POST');
+
+/**
+ * 新增评论
+ * @param comment
+ */
+export const reqAddNewComment = (comment) => ajax('/addComment', {comment}, 'POST' );
+
+/**
+ * 删除评论
+ * @param _id 要删除的评论id
+ */
+export const reqDelComment = (_id) => ajax('/delComment', {_id},'POST');
