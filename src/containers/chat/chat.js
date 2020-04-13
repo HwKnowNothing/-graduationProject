@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {NavBar, List, InputItem, Grid, Icon} from 'antd-mobile';
-import {sendMsg, readMsg} from '../../redux/actions'
-
+import {NavBar, List, InputItem, Grid, Icon, Toast} from 'antd-mobile';
+import { sendMsg, readMsg, getRejectId, changeReject } from '../../redux/actions'
+import './chat.css'
 
 const Item = List.Item;
 
@@ -35,6 +35,10 @@ class Chat extends Component {
   }
 
   componentWillMount() {
+    const { getRejectId, user } = this.props;
+    const from = this.props.match.params.userid;
+    getRejectId(user._id);
+    getRejectId(from, 'other');
     //初始化表情列表
     const emojis = ['☺', '😫', '😄', '😃', '😺', '🤣', '😣', '😚', '😁', '😸', '😂', '😝', '😵', '😲', '🧵', '🎨', '🧶', '🧺', '✂', '🌀',
       '🧬', '👖', '🖍', '📿', '📌', '🎀', '📍', '🧷', '👕', '⏲', '👚', '💺', '✈', '🚌', '🚏', '🪑', '🛋', '🚄', '🎫', '✨'];
@@ -44,10 +48,15 @@ class Chat extends Component {
   /**
    *  点击发送时调用的函数，将input中的值发送
    */
-  handleSend = () => {
+  handleSend = (flag) => {
+    if (flag !== -1) { // 表示对方屏蔽了消息
+      Toast.fail('对方屏蔽了您的消息',1);
+      return
+    }
     const from = this.props.user._id;
     const to = this.props.match.params.userid;
     const content = this.state.content.trim();
+    console.log(from,to,'1111');
     // 发送请求
     if (content) {
       // 有值才能发送
@@ -76,17 +85,51 @@ class Chat extends Component {
     }
   };
 
+  /**
+   * 切换屏蔽
+   * @param flag -1 表示未屏蔽 其他是屏蔽了
+   */
+  toggleReceiveMsg = (flag) => {
+    console.log(flag,'falg')
+    const { user, changeReject } = this.props;
+    const { myRejectId,  otherRejectId } = this.props.chat;
+    const targetId = this.props.match.params.userid; // 对方的id
+    const id = user._id; // 自己的id
+    if (flag !== -1) {
+      // 此时要取消屏蔽对方消息
+      const index = myRejectId.findIndex(item => item === targetId);
+      const newArr = JSON.parse(JSON.stringify(myRejectId));
+      newArr.splice(index, 1);
+      console.log(newArr.join(','));
+      changeReject(id, newArr.join(','))
+    } else {
+      // 屏蔽对方消息
+      const newArr = JSON.parse(JSON.stringify(myRejectId));
+      newArr.push(targetId);
+      changeReject(id, newArr.join(','))
+    }
+  };
+
   render() {
+    const { isShow } = this.state;
     const {user} = this.props;
-    const {users, chatMsgs} = this.props.chat;
-    // console.log(this.props.chat);
+    const { users, chatMsgs, myRejectId,  otherRejectId } = this.props.chat;
+    console.log(myRejectId, otherRejectId);
+    const targetId = this.props.match.params.userid;
+    const rejectFlag = myRejectId.findIndex((item) => {
+      return item === targetId
+    });
+    const rejectFlagTwo = otherRejectId.findIndex((item) => {
+      return item === user._id
+    });
+    console.log(targetId);
+    //console.log(rejectFlag,'flag')
     // 得到当前聊天的chatId
     const meId = user._id;
     if (!users[meId]) {
       // 因为msgList的获取是异步的，可能还没有获取到数据
       return null
     }
-    const targetId = this.props.match.params.userid;
     const chatId = [meId, targetId].sort().join('_');
     //对chatMsg进行过滤
     const msgs = chatMsgs.filter(msg => msg.chat_id === chatId);
@@ -102,7 +145,10 @@ class Chat extends Component {
           className='nav-bar'>
           {users[targetId].username}
         </NavBar>
-        <List style={{marginTop: 45, marginBottom: 45}}>
+        <div className={`no-chat ${rejectFlag === -1 ? '' : 'red'}`} onClick={() => this.toggleReceiveMsg(rejectFlag)}>
+          {rejectFlag !== -1 ? '您已屏蔽此人消息，点我接收他的消息' : '怕被打扰？ 点我不再接收他的消息'}
+        </div>
+        <List style={{ marginBottom: isShow ? 230 : 45, marginTop: 75}}>
           {
             msgs.map(msg => {
               if (targetId === msg.from) {// 对方发给我的
@@ -137,7 +183,7 @@ class Chat extends Component {
             extra={
               <span>
                 <span style={{marginRight: 5}} className='emoji' onClick={this.toggleShow}>😆</span>
-                <span onClick={this.handleSend}>发送</span>
+                <span onClick={() => this.handleSend(rejectFlagTwo)}>发送</span>
               </span>
             }
           />
@@ -167,5 +213,5 @@ export default connect(
     user: state.user,
     chat: state.chat
   }),
-  {sendMsg, readMsg}
+  { sendMsg, readMsg, getRejectId, changeReject }
 )(Chat)

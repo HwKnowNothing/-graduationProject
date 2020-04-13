@@ -23,7 +23,7 @@ class InfoCard extends Component{
       ActionSheet.showActionSheetWithOptions({
           options: ['删除', '取消'],
           cancelButtonIndex:1,
-          message: '是否要删除改信息',
+          message: '是否要删除该信息',
           maskClosable: true,
           destructiveButtonIndex: 0,
           'data-seed': 'logId',

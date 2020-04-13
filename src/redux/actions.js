@@ -24,6 +24,8 @@ import {
   reqGetComment,
   reqAddNewComment,
   reqDelComment,
+  reqGetRejectId,
+  reqChangeReject,
 } from '../api/index';
 import {
   AUTH_SUCCESS,
@@ -42,7 +44,9 @@ import {
   ZUKE_HOUSING,
   GET_ALL_COMMENT,
   ADD_COMMENT,
-  DELETE_COMMENT
+  DELETE_COMMENT,
+  GET_REJECT_ID,
+  GET_REJECT_ID_OTHER,
 } from './action-types';
 import {isEmpty} from "../utils";
 
@@ -80,6 +84,10 @@ const getAllComment = (data) => ({ type: GET_ALL_COMMENT, data });
 const addNewComment = (comment) => ({ type: ADD_COMMENT, data: comment });
 // 删除房源
 const deleteComment = (id) => ({ type: DELETE_COMMENT, data: id });
+// 用户屏蔽的id
+const myRejectId = (ids) => ({ type: GET_REJECT_ID, data: ids });
+// 聊天对象屏蔽的id
+const otherRejectId = (ids) => ({ type: GET_REJECT_ID_OTHER, data: ids });
 
 /**
  * 异步获取消息列表数据
@@ -430,6 +438,48 @@ export const delComment = (id) => {
     if (result.code === 0) {
       Toast.success('删除成功', 1);
       dispatch(deleteComment(id))
+    }
+  }
+};
+
+/**
+ * 获取屏蔽id
+ * @param id userId
+ * @param flag 判断是自己的屏蔽名单还是聊天对象的屏蔽名单
+ */
+export const getRejectId = (id, flag = 'my') => {
+  return async dispatch => {
+    const res = await reqGetRejectId(id);
+    const result = res.data;
+    if (result.code === 0) {
+      let ids;
+      // 用户没有屏蔽过其他人result.ids就是null
+      try {
+        ids = result.ids.rejectId.split(",")
+      } catch (e) {
+        ids = [];
+      }
+      if (flag === 'my') { // 自己的屏蔽名单
+        dispatch(myRejectId(ids))
+      } else if (flag === 'other') {
+        dispatch(otherRejectId(ids))
+      }
+    }
+  }
+};
+
+/**
+ * 改变自己的屏蔽名单
+ * @param id 用户id
+ * @param rejectId 屏蔽的id
+ */
+export const changeReject = (id, rejectId) => {
+  console.log(id, rejectId,'action')
+  return async dispatch => {
+    const res = await reqChangeReject(id, rejectId);
+    const result = res.data;
+    if (result.code === 0) {
+      dispatch(myRejectId(rejectId.split(",")))
     }
   }
 };

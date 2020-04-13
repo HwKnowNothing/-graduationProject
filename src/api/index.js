@@ -108,3 +108,16 @@ export const reqAddNewComment = (comment) => ajax('/addComment', {comment}, 'POS
  * @param _id 要删除的评论id
  */
 export const reqDelComment = (_id) => ajax('/delComment', {_id},'POST');
+
+/**
+ * 获取屏蔽的用户
+ * @param id
+ */
+export const reqGetRejectId = (id) => ajax('/getRejectId', {id}, 'POST');
+
+/**
+ * 改变屏蔽名单
+ * @param id 用户id
+ * @param rejectId 需要屏蔽的id
+ */
+export const reqChangeReject = (id, rejectId) => ajax('/changRejectId', {id, rejectId}, 'POST');

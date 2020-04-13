@@ -15,3 +15,5 @@ export const ZUKE_HOUSING = 'ZUKE_HOUSING'; // 获取租客房源
 export const GET_ALL_COMMENT = 'GET_ALL_COMMENT'; // 获取所有评论
 export const ADD_COMMENT = 'ADD_COMMENT'; // 新增评论
 export const DELETE_COMMENT = 'DELETE_COMMENT'; // 删除评论
+export const GET_REJECT_ID = 'GET_REJECT_ID'; // 获取自身屏蔽id
+export const GET_REJECT_ID_OTHER = 'GET_REJECT_ID_OTHER'; // 获取他人屏蔽id

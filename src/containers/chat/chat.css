@@ -1,1 +1,15 @@
+.no-chat {
+    position: fixed;
+    top: 45px;
+    width: 375px;
+    height: 30px;
+    z-index: 1000;
+    background-color: #62AB00;
+    line-height: 30px;
+    color: #FFFFFF;
+    text-align: center;
+}
 
+.red {
+    background-color: red;
+}

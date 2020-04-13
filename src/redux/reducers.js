@@ -19,7 +19,7 @@ import {
   GET_INFO,
   DELETE_INFO,
   ZUKE_HOUSING,
-  GET_ALL_COMMENT, ADD_COMMENT, DELETE_COMMENT,
+  GET_ALL_COMMENT, ADD_COMMENT, DELETE_COMMENT, GET_REJECT_ID, GET_REJECT_ID_OTHER,
 } from './action-types'
 
 const initUser = {
@@ -66,7 +66,9 @@ function userList(state = initUserList, action) {
 const initChat = {
   users: {},     //所有用户信息的对象 属性名:userid 属性值:{username,header}
   chatMsgs: [], //当前用户所有相关msg的数组
-  unReadCount: 0  //总的未读数量
+  unReadCount: 0,  //总的未读数量
+  myRejectId: [], // 自身的屏蔽名单，用来判断聊天界面头部的显示
+  otherRejectId: [], // 当前聊天对象的屏蔽id名单 如果用户id不在里面表示可以发送，在就不能发送信息
 };
 
 function chat(state = initChat, action) {
@@ -74,6 +76,7 @@ function chat(state = initChat, action) {
     case RECEIVE_MSG_LIST:
       const {users, chatMsgs,userid} = action.data;
       return {
+        ...state,
         users,
         chatMsgs,
         unReadCount: chatMsgs.reduce((preTotal,msg)=> preTotal+(!msg.read&&msg.to===userid?1:0),0)
@@ -81,6 +84,7 @@ function chat(state = initChat, action) {
     case RECEIVE_MSG:
       const {chatMsg} = action.data;
       return {
+        ...state,
         users: state.users,
         chatMsgs: [...state.chatMsgs, chatMsg],
         unReadCount: chatMsg.unReadCount + (!chatMsg.read&&chatMsg.to===action.data.userid?1:0)
@@ -88,6 +92,7 @@ function chat(state = initChat, action) {
     case MSG_READ:
       const {from,to,count} = action.data;
       return {
+        ...state,
         users: state.users,
         chatMsgs: state.chatMsgs.map(item=>{
           if (item.from === from && item.to === to && !item.read){
@@ -98,6 +103,10 @@ function chat(state = initChat, action) {
         }),
         unReadCount: state.unReadCount - count
       };
+    case GET_REJECT_ID:
+      return { ...state, myRejectId: action.data };
+    case GET_REJECT_ID_OTHER:
+      return { ...state, otherRejectId: action.data };
     default:
       return state;
   }
